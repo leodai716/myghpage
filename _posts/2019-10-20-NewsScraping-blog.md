@@ -22,6 +22,56 @@ Before scraping news opinion, I started a mini project trying get graphics cards
 
 From this mini project, I learned to use the `requests` package and parsing html with `BeautifulSoup`. By this point everything seemed good and I was fairly confident that I will be able to complete the scraping with ease.  
 
+```python
+# import libraries
+from bs4 import BeautifulSoup as soup 
+import requests 
+
+# get the html
+gcards_url = "https://www.newegg.com/Video-Cards-Video-Devices/Category/ID-38?Tpk=graphics%20cards"
+uClient = requests.get(gcards_url)
+
+# parse html and save output 
+page_soup = soup(page_html, "html.parser")
+containers = page_soup.findAll("div", {"class":"item-container"})
+
+filename = "g_cards.tsv"
+f = open(filename, "w")
+headers = "product_name\tproduct_name\tproduct_price\tproduct_ship\tproduct_total_price\n"
+f.write(headers)
+
+for container in containers:
+    product_brand = container.find("div", {"class":"item-info"}).find("div", {"class":"item-branding"}).a.img["title"]
+
+    product_name = container.find("div", {"class":"item-info"}).find("a", {"class":"item-title"}).text
+
+    product_price_str = container.find("div", {"class":"item-info"}).find("div", {"class":"item-action"}).find("li", {"class":"price-current"}).strong.text
+    product_price_sup = container.find("div", {"class":"item-info"}).find("div", {"class":"item-action"}).find("li", {"class":"price-current"}).sup.text
+    product_price = float(product_price_str + product_price_sup)
+
+    product_ship = container.find("div", {"class":"item-info"}).find("div", {"class":"item-action"}).find("li", {"class":"price-ship"}).text.strip()
+    
+    if product_ship == "Free Shipping": 
+        product_ship = 0
+    else:
+        product_ship = product_ship[1:product_ship.find(" ")]
+    
+    product_ship = float(product_ship)
+    
+    product_total_price = product_price + product_ship
+    
+    print(product_brand)
+    print(product_name)
+    print(product_price)
+    print(product_ship)
+    print(product_total_price)
+    
+    f.write(product_brand +"\t"+ product_name +"\t"+ str(product_price) +"\t"+ str(product_ship) +"\t"+ str(product_total_price)+"\n")
+
+f.close()
+
+```
+
 ## Oops, today is not yesterday nor day before yesterday
 Our Idea was simple, we would like to build a machine learning model that compare the likelihood of different Brexit outcome with performance indicators. My duty was to understand whether news paper’s opinion would give us any lights on the sentiments. That means my task in data scraping is to get opinions from major news website throughout our period of analysis. However, Websites are constantly changing, and one would not be able to find the opinion of 2008, or even if one could find that it would not appear in the opinion page to today’s website. Therefore, we need a way to capture past opinion headlines and their text for analysis. At last I come across the idea of internet archive with WayBack machine. WayBack Machine allows users to jump to a saved screenshot of a website in previous times. That means we could get the past opinion headline and compare those headlines with Brexit events and some financial indicators. 
 
