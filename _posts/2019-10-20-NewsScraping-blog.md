@@ -33,4 +33,4 @@ Because of the presence of comma in the text and I would like to preserve as muc
 
 ## Concluding Remark
 The code runs perfectly, but it takes about one day to scrap data form first of January 2019 to mid-October. That means it’s almost impossible to put the code running on a laptop. Luckily, I have a desktop dedicated to running this kind of extra time-consuming codes. 
-Also, life is short. Use API when available or simply stay away from web scraping. It will save you a great deal of anger of frustration. Well, now I am addicted so I can sink deeper in this bottomless abyss. 
+Also, life is short. Use API when available or simply stay away from web scraping. It will save you a great deal of anger of frustration. Well, now I am addicted so I can only sink deeper in this bottomless abyss. 
