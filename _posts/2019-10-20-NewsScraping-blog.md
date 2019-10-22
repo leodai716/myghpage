@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "First step for NLP: Getting Textual data (aka. Have fun with HTML)"
-date:   2019-10-18
+date:   2019-10-20
 categories: NLP
 author: "Leo Dai"
 ---
