@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "I’m sorry I annoyed you with my efficiency"
-date:   2019-11-12
+date:   2019-11-20
 categories: NLP
 author: "Leo Dai"
 ---
